@@ -2,7 +2,7 @@
 
 My personal app
 
-## 🧠 Stack technique
+## Stack technique
 
 ### Backend
 - Django
