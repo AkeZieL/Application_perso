@@ -1,16 +1,21 @@
 # Application_perso
-My personnal app
 
-Stack technique
-    Backend : Django 
-        Authentification : JWT (JSON Web Token)
-        API : REST API
-        CORS configuré avec django-cors-headers (Next.js frontend autorisé)
-        
-    Frontend : Next.js 
-        Communication avec l’API Django via REST
-        shadcn/ui (composants modernes basés sur Tailwind CSS)
+My personal app
 
-    Base de données : PostgreSQL
-        Extension géospatiale : PostGIS
+## 🧠 Stack technique
 
+### Backend
+- Django
+- Django REST Framework
+- JWT Authentication
+- CORS (django-cors-headers)
+
+### Frontend
+- Next.js
+- shadcn/ui
+- Tailwind CSS
+- REST API communication with Django
+
+### Database
+- PostgreSQL
+- PostGIS (géospatial)
