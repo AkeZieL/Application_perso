@@ -1,0 +1,75 @@
+services:
+  # ==========================
+  # Django Backend
+  # ==========================
+  django:
+    container_name: django
+    build:
+      context: ./services/django
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/django/plateforme:/plateforme
+      - static_files:/plateforme/static
+      - media_files:/plateforme/media
+    depends_on:
+      - postgres
+    networks:
+      - Application
+    restart: on-failure
+
+  # ==========================
+  # PostgreSQL
+  # ==========================
+  postgres:
+    container_name: postgres
+    networks:
+      - Application
+    build:
+      context: ./services/postgres
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "4321:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: on-failure
+
+  # ==========================
+  # React
+  # ==========================
+  react:
+    container_name: react
+    build:
+      context: ./services/react
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/react/frontend_plateforme:/frontend_plateforme
+      -  node_modules:/frontend_plateforme/node_modules
+    ports:
+      - "3000:3000"
+    env_file: .env
+    networks:
+      - Application
+    restart: on-failure
+# ==========================
+# Volumes persistants
+# ==========================
+volumes:
+  node_modules:
+    driver: local
+  postgres_data:
+    driver: local
+  static_files:
+    driver: local
+  media_files:
+    driver: local
+
+# ==========================
+# Network
+# ==========================
+networks:
+  Application:
+    driver: bridge

@@ -1,0 +1,21 @@
+### CONTAINS ALL THE NEEDED PYTHON LIBS ###
+### VERSIONS ARE THE LASTEST ATM ###
+
+# WEBSERV #
+
+django==5.1.2
+django-cleanup==9.0.0
+django-request-logging==0.7.5
+djangorestframework==3.17.1
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.9.0
+
+# POSTGRESQL #
+
+psycopg2==2.9.10
+
+# UTILS #
+
+tzdata==2024.2
+Pillow==11.0.0
+requests==2.32.3

@@ -1,0 +1,9 @@
+.env
+*.mo
+__pycache__/
+*__pycache__/
+__pycache__
+media/
+static/
+migrations/
+*django.mo
