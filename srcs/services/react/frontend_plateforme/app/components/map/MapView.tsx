@@ -6,7 +6,7 @@ const LeafletMap = dynamic(() => import("./LeafletMap"), {
   ssr: false,
 });
 
-export default function MapView() {
+export default function MapView({ filters }) {
   
-  return <LeafletMap />;
+  return <LeafletMap filterType={filters.type} filterCategory={filters.categories}/>;
 }

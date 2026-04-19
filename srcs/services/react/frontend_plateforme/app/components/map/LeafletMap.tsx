@@ -2,40 +2,48 @@
 
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import api from "@/app/lib/api/axios";
+import getNearbyPoint from "@/app/lib/http/point/nearbyPoint"
 import parsePoint from "@/app/lib/utils/parsePoint"
 import getIcon from "@/app/lib/utils/getIcon"
+import { useGeolocation } from "@/app/hooks/useGeolocation";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 
-export default function LeafletMap() {
+export default function LeafletMap({ filterType, filterCategory }) {
   const [points, setPoints] = useState<any[]>([]);
+  const { position, loading, error } = useGeolocation();
   const [center, setCenter] = useState<[number, number]>([42.8, 2.5]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      const { latitude, longitude } = pos.coords;
+useEffect(() => {
+    if (loading || error || !position) return;
 
-      setCenter([latitude, longitude]);
+    setCenter([position.latitude, position.longitude]);
 
-      const params = new URLSearchParams({
-        latitude: String(latitude),
-        longitude: String(longitude),
-        radius: "25",
-      });
+    const fetchNearby = async () => {
       try {
-        const res = await api.get(`point/nearby/?${params.toString()}`);
-        console.log("points nearby:", res.data);
-        //Affichier point sur carte
-        setPoints(res.data);
-      } catch (error) {
-        console.error("Erreur nearby:", error);
+        const params: any = {
+          latitude: position.latitude,
+          longitude: position.longitude,
+          radius: 25,
+        };
+        if (filterType !== "") {
+          params.type = filterType;
+        }
+        if (filterCategory !== "") {
+          params.categories = filterCategory;
+        }
+
+        console.log('GET NEARBY POINT WITH PARAM: ', params);
+        const data = await getNearbyPoint(params);
+        setPoints(data || []);
+      } catch (err) {
+        console.error("nearby point error:", err);
+        setPoints([]);
       }
-    },
-    (err) => {
-      console.error("GEO ERROR:", err);
-    });
-  }, []);
+    };
+
+    fetchNearby();
+  }, [position, filterType, filterCategory]);
 
   return (
     <MapContainer

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import logoutRequest from "../lib/http/logout";
+import logoutRequest from "@/app/lib/http/auth/logout";
 
 export function useLogout() {
   const router = useRouter();

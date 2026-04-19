@@ -1,4 +1,4 @@
-import api from "../api/axios";
+import api from "@/app/lib/api/axios";
 
 const register = async (username, email, password1, password2, role) => {
   try {

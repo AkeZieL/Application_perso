@@ -20,7 +20,7 @@ class PointViewSet(viewsets.ModelViewSet):
         lng = float(request.query_params.get("longitude"))
         radius = float(request.query_params.get("radius", 5))  # km
 
-        if not lat or not lng:
+        if lat is None or lng is None:
             return Response(
                 {"error": "latitude et longitude requis"},
                 status=400
@@ -47,6 +47,14 @@ class PointViewSet(viewsets.ModelViewSet):
             )
             .order_by("distance")
         )
+
+        types = request.query_params.getlist("type")
+        if types:
+            points = points.filter(type__in=types)
+        categories = request.query_params.getlist("categories")
+        if categories:
+            points = points.filter(category__in=categories)
+
 
         serializer = self.get_serializer(points, many=True)
         return Response(serializer.data)

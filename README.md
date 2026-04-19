@@ -8,6 +8,7 @@ My personal app
 - Django
 - Django REST Framework
 - JWT Authentication
+- Cookie HttpOnly
 - CORS (django-cors-headers)
 
 ### Frontend

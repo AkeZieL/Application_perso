@@ -3,11 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import register from "../../lib/http/register"
-import formatApiError from "../../lib/utils/formatApiError"
-
-import Button from "../../components/settings/CreatePointButton"
-import AppRouteRouteModule from "next/dist/server/route-modules/app-route/module";
+import register from "@/app/lib/http/auth/register"
+import formatApiError from "@/app/lib/utils/formatApiError"
 
 
 
@@ -101,9 +98,6 @@ export default function Register() {
 
                 <button type="submit">Register</button>
             </form>
-            <div>
-                <Button />
-            </div>
         </div>
     );
 }

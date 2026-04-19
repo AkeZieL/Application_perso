@@ -5,7 +5,7 @@ import CreatePointButton from "./CreatePointButton";
 import CreatePointWithAddress from "./CreatePointWithAddress"
 
 import formatApiError from "../../lib/utils/formatApiError"
-import createPoint from "../../lib/http/createPoint"
+import createPoint from "../../lib/http/point/createPoint"
 
 export default function CreatePointFlow() {
   const [mode, setMode] = useState(null);

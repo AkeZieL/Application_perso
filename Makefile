@@ -59,8 +59,8 @@ re: remove $(NAME)
 
 help:
 	@echo "Here's all the avalible make commands:\n\n" \
-	"- transcendence: Default rule to build and start the project.\n" \
-	"- transcendence-logs: Build and start the containers with real-time logs displayed in your terminal. Press Ctrl + C to stop the project.\n" \
+	"- Application: Default rule to build and start the project.\n" \
+	"- app-logs: Build and start the containers with real-time logs displayed in your terminal. Press Ctrl + C to stop the project.\n" \
 	"- build: Simply builds the project.\n" \
 	"- start: Simply starts the project.\n" \
 	"- start-logs: Simply starts the project with real-time logs displayed in your terminal. Press Ctrl + C to stop the project.\n" \

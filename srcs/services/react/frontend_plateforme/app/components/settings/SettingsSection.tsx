@@ -1,7 +1,8 @@
 "use client";
 
 import CreatePointFlow from "../settings/CreatePointFlow";
-import { useState } from "react";
+import { useGeolocation } from "@/app/hooks/useGeolocation";
+import { useState, useEffect } from "react";
 
 import {
   Accordion,
@@ -10,40 +11,39 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion"
 
-export default function SettingsSection() {
+export default function SettingsSection({ filters, setFilters }) {
 
-  const [filters, setFilters] = useState({
-    type: [],
-    categories" []
-  });
-  const toggleFilter = (value, value) => {
-    _type = ["lieu", "event"];
-    _place = ["restaurant", "hotel"]
-
-    //Verifier la valeur obtenu si c'et un _type ou un _place
-
-    //Faire le bon appel api pour recevoir uniquement les bon truc a
+  const updateFilter = (key: "type" | "category", value: string | null) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
-  const isActive = (value) => filters.includes(value);
-
+  const toggleType = (newType: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      type: prev.type === newType ? null : newType,
+      // On réinitialise la catégorie quand on change de type (recommandé)
+      category: prev.type === newType ? prev.category : null,
+    }));
+  };
   return (
     <div>
       <h2 className="font-bold mb-2">Recherche personnalisé</h2>
       <Accordion type="multiple" className="w-full">
         <AccordionItem value="lieu">
-          <AccordionTrigger onClick={() => toggleFilter("type", "place")}>Lieu</AccordionTrigger>
+          <AccordionTrigger onClick={() => toggleType("place")}>Lieu</AccordionTrigger>
           <AccordionContent>
             <button 
-              onClick={() => toggleFilter("categories", "restaurant")} 
-              //className={isActive("restaurant") ? "text-blue-500 font-bold" : ""}>
+              onClick={() => updateFilter("place")}
+              className={filters.category === "restaurant" ? "font-bold text-blue-600" : ""}
               >
               Restaurant
             </button>
 
             <button 
-              onClick={() => toggleFilter("categories", "hotel")}
-              //className={isActive("hotel") ? "text-blue-500 font-bold" : ""}>
+              onClick={() => updateFilter("place")}
               >
               Hôtel
             </button>
@@ -51,7 +51,7 @@ export default function SettingsSection() {
         </AccordionItem>
 
         <AccordionItem value="events">
-          <AccordionTrigger onClick={() => toggleFilter("event")}>Événements</AccordionTrigger>
+          <AccordionTrigger onClick={() => toggleType("event")}>Événements</AccordionTrigger>
           <AccordionContent>
             Festivals<br />
             Concerts<br />
@@ -61,6 +61,7 @@ export default function SettingsSection() {
 
       </Accordion>
       <CreatePointFlow />
+      <hr />
     </div>
   );
 }

@@ -2,10 +2,10 @@
 
 import MapView from "../map/MapView";
 
-export default function MapPanel({ mode, onCreatePoint }) {
+export default function MapPanel({ mode, filters, onCreatePoint }) {
   return (
     <div className="h-full w-full">
-      <MapView  mode={mode} onCreatePoint={onCreatePoint}/>
+      <MapView  mode={mode}  filters={filters} onCreatePoint={onCreatePoint}/>
     </div>
   );
 }

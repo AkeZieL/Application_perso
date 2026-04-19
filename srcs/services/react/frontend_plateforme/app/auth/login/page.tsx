@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import login from "../../lib/http/login"
-import formatApiError from "../../lib/utils/formatApiError"
-import Button from "../../components/settings/CreatePointButton"
+import login from "@/app/lib/http/auth/login"
+import formatApiError from "@/app/lib/utils/formatApiError"
+import Button from "@/app/components/settings/CreatePointButton"
 
 import Link from "next/link";
 

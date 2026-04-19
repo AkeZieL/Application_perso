@@ -142,7 +142,7 @@ SESSION_COOKIE_SECURE = False # POUR PASSAGE EN PROD: True
 CSRF_COOKIE_SECURE = False # POUR PASSAGE EN PROD: True
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=10),  # Token court
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),  # Token court
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # Token long pour renouvellement
     'ROTATE_REFRESH_TOKENS': True,                  # Génère un nouveau refresh token à chaque utilisation
     'BLACKLIST_AFTER_ROTATION': True,               # Permet de révoquer les anciens refresh tokens

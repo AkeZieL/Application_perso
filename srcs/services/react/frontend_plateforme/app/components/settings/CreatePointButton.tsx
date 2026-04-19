@@ -23,11 +23,11 @@ export default function CreatePointButton({ onSelect }) {
           <button onClick={() => handleSelect("address")}>
             Via adresse
           </button>
-
+          <hr />
           <button onClick={() => handleSelect("map")}>
             En cliquant sur la carte
           </button>
-
+          <hr />
           <button onClick={() => setShowPopup(false)}>
             Annuler
           </button>

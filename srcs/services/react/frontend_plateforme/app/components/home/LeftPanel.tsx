@@ -1,7 +1,7 @@
 import SettingsSection from "../settings/SettingsSection";
 
 
-export default function LeftPanel({ mode, setMode }) {
+export default function LeftPanel({ mode, setMode, filters, setFilters}) {
   return (
     <div>
         <div>
@@ -12,7 +12,7 @@ export default function LeftPanel({ mode, setMode }) {
             />
         </div>
         <div className="border-t pt-4">
-            <SettingsSection />
+            <SettingsSection filters={filters} setFilters={setFilters} />
         </div>
     </div>
   );
