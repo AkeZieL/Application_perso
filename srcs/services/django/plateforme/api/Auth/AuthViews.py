@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from .serializer import CustomUserSerializer
+from .AuthSerializer import CustomUserSerializer
 import re
 
 from django.views.decorators.csrf import csrf_exempt
@@ -87,7 +87,6 @@ def RegisterView(request):
                     "id": user.id,
                     "email": user.email,
                     "username": user.username,
-                    "role": user.role
                 }
             },
             status=status.HTTP_201_CREATED

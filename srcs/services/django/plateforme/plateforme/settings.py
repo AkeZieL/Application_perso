@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'api',
+    "subscription.apps.SubscriptionConfig",
+
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
@@ -118,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "api.cookieAuth.CookieJWTAuthentication",
+        "api.Auth.cookieAuth.CookieJWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -135,13 +137,13 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-SESSION_COOKIE_SAMESITE = "None" # POUR PASSAGE EN PROD: None 
-CSRF_COOKIE_SAMESITE = "None" # POUR PASSAGE EN PROD: None 
+SESSION_COOKIE_SAMESITE = "Lax" # POUR PASSAGE EN PROD: None 
+CSRF_COOKIE_SAMESITE = "Lax" # POUR PASSAGE EN PROD: None 
 
 SESSION_COOKIE_SECURE = False # POUR PASSAGE EN PROD: True 
 CSRF_COOKIE_SECURE = False # POUR PASSAGE EN PROD: True
 
-SIMPLE_JWT = {
+SIMPLE_JWT = {  
     'ACCESS_TOKEN_LIFETIME': timedelta(seconds=300),  # Token court
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # Token long pour renouvellement
     'ROTATE_REFRESH_TOKENS': True,                  # Génère un nouveau refresh token à chaque utilisation

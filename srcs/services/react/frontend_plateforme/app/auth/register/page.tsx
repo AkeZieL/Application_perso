@@ -9,7 +9,6 @@ import formatApiError from "@/app/lib/utils/formatApiError"
 
 
 export default function Register() {
-    const [role, setRole] = useState('');
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password1, setPassword1] = useState('')
@@ -22,7 +21,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            const data = await register(username, email, password1, password2, role);
+            const data = await register(username, email, password1, password2);
             console.log("User créé :", data);
             router.push("/auth/login");
         } catch (err) {
@@ -71,31 +70,6 @@ export default function Register() {
                     required
                 />
                 <hr />
-
-                <label>role: 
-                    <input
-                        type="radio"
-                        name="role"
-                        value="boss"
-                        checked={role === "boss"}
-                        onChange={(e) => setRole(e.target.value)}
-                    />
-                    Patron
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="role"
-                        value="employee"
-                        checked={role === "employee"}
-                        onChange={(e) => setRole(e.target.value)}
-                    />
-                    Employé
-                </label>
-                <hr />
-                
-
-
                 <button type="submit">Register</button>
             </form>
         </div>

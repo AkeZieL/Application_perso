@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 import login from "@/app/lib/http/auth/login"
 import formatApiError from "@/app/lib/utils/formatApiError"
-import Button from "@/app/components/settings/CreatePointButton"
 
 import Link from "next/link";
 
@@ -61,9 +60,6 @@ export default function Login() {
                     </Link>
                 </p>
             </form>
-            <div>
-                <Button />
-            </div>
         </div>
   );
 }

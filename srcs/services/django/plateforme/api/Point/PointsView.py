@@ -7,7 +7,7 @@ from django.contrib.gis.measure import D
 from django.contrib.gis.db.models.functions import Distance
 
 from .PointsModel import Point
-from .serializer import PointSerializer
+from .PointSerializer import PointSerializer
 from math import radians, sin, cos, asin, sqrt
 
 class PointViewSet(viewsets.ModelViewSet):

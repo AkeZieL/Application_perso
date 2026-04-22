@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.conf import settings
+from ..Etablissement.EtablissementModels import Establishment
 
 
 class Point(models.Model):
@@ -27,10 +28,16 @@ class Point(models.Model):
         on_delete=models.CASCADE,
         related_name="points"
     )
-
+    etablissement = models.ForeignKey(
+        Establishment,
+        on_delete=models.CASCADE,
+        related_name="points"
+    ) 
+    is_active = models.BooleanField(default=True)
     class Meta:
         indexes = [
             models.Index(fields=["type"]),
+            models.Index(fields=["category"]),
         ]
     def __str__(self):
         return f"{self.name} ({self.type})"

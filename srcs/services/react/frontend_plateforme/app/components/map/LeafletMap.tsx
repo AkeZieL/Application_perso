@@ -7,6 +7,7 @@ import parsePoint from "@/app/lib/utils/parsePoint"
 import getIcon from "@/app/lib/utils/getIcon"
 import { useGeolocation } from "@/app/hooks/useGeolocation";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import RecenterMap  from "./RecenterMap"
 
 
 export default function LeafletMap({ filterType, filterCategory }) {
@@ -51,6 +52,8 @@ useEffect(() => {
       zoom={13}
       className="h-full w-full"
     >
+      <RecenterMap position={position} />
+
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {points.map((p) => {
         const position = parsePoint(p.location);

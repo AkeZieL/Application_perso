@@ -1,13 +1,12 @@
 import api from "@/app/lib/api/axios";
 
-const register = async (username, email, password1, password2, role) => {
+const register = async (username, email, password1, password2) => {
   try {
     const res = await api.post("auth/register/", {
       email,
       username,
       password1,
       password2,
-      role,
     });
 
     return res.data;

@@ -31,20 +31,19 @@ export default function SettingsSection({ filters, setFilters }) {
   return (
     <div>
       <h2 className="font-bold mb-2">Recherche personnalisé</h2>
-      <Accordion type="multiple" className="w-full">
+      <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="lieu">
           <AccordionTrigger onClick={() => toggleType("place")}>Lieu</AccordionTrigger>
           <AccordionContent>
             <button 
-              onClick={() => updateFilter("place")}
+              onClick={() => updateFilter("category", "restaurant")}
               className={filters.category === "restaurant" ? "font-bold text-blue-600" : ""}
               >
               Restaurant
             </button>
-
-            <button 
-              onClick={() => updateFilter("place")}
-              >
+          </AccordionContent>
+          <AccordionContent>
+            <button onClick={() => updateFilter("category", "hotel")}>
               Hôtel
             </button>
           </AccordionContent>

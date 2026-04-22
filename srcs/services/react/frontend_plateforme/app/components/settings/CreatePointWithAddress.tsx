@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogOverlay,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
 
 export default function CreatePointWithAddress({ onSubmit, onClose }) {
     const [address, setAddress] = useState("");
@@ -59,32 +69,55 @@ export default function CreatePointWithAddress({ onSubmit, onClose }) {
         }
     };
 
-  return (
-    <div className="modal">
-        <h3>Entrer une adresse</h3>
+return (
+    <Dialog open={open} onOpenChange={onClose}>
+        <DialogOverlay className="fixed inset-0 z-[9998] bg-black/50 backdrop-blur-sm" />
+        <DialogContent className="sm:max-w-md z-[9999]">
+            <DialogHeader>
+                <DialogTitle>Entrer une adresse</DialogTitle>
+            </DialogHeader>
 
-        <input
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Ex: 22 rue de la Boite, Lézignan-Corbières"
-        className="border p-2 w-full"
-        />
-        <div>
-            <button onClick={() => setPointType("place")}>
-                Lieu
-            </button>
-            <button onClick={() => setPointType("event")}>
-                Evènement
-            </button>
-        </div>
+            <div className="space-y-4">
+                <input
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Ex: 22 rue de la Boite, Lézignan-Corbières"
+                    className="border p-2 w-full rounded"
+                />
 
-        <button onClick={handleGeocode} disabled={loading}>
-        {loading ? "Recherche..." : "Valider"}
-        </button>
-        <hr />
-        <button onClick={onClose}>
-            Annuler
-        </button>
-    </div>
+                <div className="flex gap-2">
+                    <Button
+                    onClick={() => setPointType("place")}
+                    variant={pointType === "place" ? "default" : "outline"}
+                    className="flex-1"
+                    >
+                    Lieu
+                    </Button>
+
+                    <Button
+                    onClick={() => setPointType("event")}
+                    variant={pointType === "event" ? "default" : "outline"}
+                    className="flex-1"
+                    >
+                    Évènement
+                    </Button>
+                </div>
+            </div>
+
+            <DialogFooter className="flex flex-col gap-2">
+                <Button onClick={handleGeocode} disabled={loading} className="w-full">
+                    {loading ? "Recherche..." : "Valider"}
+                </Button>
+
+                <Button
+                    variant="secondary"
+                    onClick={onClose}
+                    className="w-full"
+                >
+                    Annuler
+                </Button>
+            </DialogFooter>
+        </DialogContent>
+    </Dialog>
   );
 }

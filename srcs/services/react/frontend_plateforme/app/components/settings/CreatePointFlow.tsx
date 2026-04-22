@@ -10,6 +10,7 @@ import createPoint from "../../lib/http/point/createPoint"
 export default function CreatePointFlow() {
   const [mode, setMode] = useState(null);
   const [error, setError] = useState("");
+  
 
   const closeAll = () => setMode(null);
 
