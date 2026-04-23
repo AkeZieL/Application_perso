@@ -5,11 +5,11 @@ from django.conf import settings
 
 class Establishment(models.Model):
     CATEGORY_CHOICES = [
-        ("restaurant", "Restaurant"),
-        ("bar", "Bar"),
-        ("hotel", "Hotel"),
-        ("shop", "Shop"),
-        ("other", "Other"),
+        ("Restaurant", "Restaurant"),
+        ("Bar", "Bar"),
+        ("Hotel", "Hotel"),
+        ("Shop", "Shop"),
+        ("Other", "Other"),
     ]
 
     owner = models.ForeignKey(
@@ -19,11 +19,7 @@ class Establishment(models.Model):
     )
 
     name = models.CharField(max_length=255, null=False)
-    description = models.TextField(blank=True, null=True)
-
     address = models.CharField(max_length=255, null=False)
-
-    location = models.PointField(null=True, geography=True, spatial_index=True) 
 
     category = models.CharField(
         max_length=50,
@@ -31,9 +27,12 @@ class Establishment(models.Model):
         default="other"
     )
 
+    location = models.PointField(null=True, geography=True, spatial_index=True) 
     phone = models.CharField(max_length=30, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
 
+
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

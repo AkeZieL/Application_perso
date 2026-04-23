@@ -1,5 +1,3 @@
-"use client";
-
 import MapView from "../map/MapView";
 
 export default function MapPanel({ mode, filters, onCreatePoint }) {

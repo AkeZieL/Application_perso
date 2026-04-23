@@ -1,4 +1,4 @@
-import SettingsSection from "../settings/SettingsSection";
+import LeftPanelView from "../leftPanel/LeftPanelView";
 
 
 export default function LeftPanel({ mode, setMode, filters, setFilters}) {
@@ -12,7 +12,7 @@ export default function LeftPanel({ mode, setMode, filters, setFilters}) {
             />
         </div>
         <div className="border-t pt-4">
-            <SettingsSection filters={filters} setFilters={setFilters} />
+            <LeftPanelView filters={filters} setFilters={setFilters} />
         </div>
     </div>
   );

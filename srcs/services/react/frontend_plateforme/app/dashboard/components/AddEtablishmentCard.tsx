@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/dialog";
 
 
-
 export default function CreateEstablishment() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -139,11 +138,11 @@ export default function CreateEstablishment() {
               </SelectTrigger>
 
               <SelectContent>
-                <SelectItem value="restaurant">Restaurant</SelectItem>
-                <SelectItem value="bar">Bar</SelectItem>
-                <SelectItem value="hotel">Hôtel</SelectItem>
-                <SelectItem value="shop">Boutique</SelectItem>
-                <SelectItem value="other">Autre</SelectItem>
+                <SelectItem value="Restaurant">Restaurant</SelectItem>
+                <SelectItem value="Bar">Bar</SelectItem>
+                <SelectItem value="Hotel">Hôtel</SelectItem>
+                <SelectItem value="Shop">Boutique</SelectItem>
+                <SelectItem value="Other">Autre</SelectItem>
               </SelectContent>
             </Select>
           </div>
