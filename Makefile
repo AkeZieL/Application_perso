@@ -1,4 +1,4 @@
-NAME = Application
+NAME = app
 
 YAML = ./srcs/docker-compose.yaml
 
@@ -29,7 +29,9 @@ remove: stop
 	-@docker rmi srcs-django \
 				srcs-postgres \
 
-#	-@docker volume rm	just in case there is a volume someday
+	-@docker volume rm	srcs_node_modules \
+				srcs_static_files \
+				srcs_media_files
 
 	-@docker network rm	srcs_transcendence
 

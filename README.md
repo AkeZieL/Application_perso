@@ -23,8 +23,12 @@ My personal app
 
 ## Utilisation
 
-Pour utiliser le système de creation de points, vous devez crée un SubcriptionPlan via Django Admin.
-Voici la liste des features correspondant à chaque Plan:
-    free --> Features = []
-    pro --> Features = ["create_place"]
-    entreprise --> Features = ["create_place", "create_event"]
+Modifiez le .env_template par .env, remplissez avec vos identifiant.<br>
+Le Makefile propose différentes commande voici celle pour démarrer le projet:<br>
+    make app ou make app-log(affiche les logs)<br>
+
+Pour utiliser le système de creation de points, vous devez crée un SubcriptionPlan via Django Admin.<br>
+Voici la liste des features correspondant à chaque Plan:<br>
+    free --> Features = []<br>
+    pro --> Features = ["create_place"]<br>
+    entreprise --> Features = ["create_place", "create_event"]<br>
