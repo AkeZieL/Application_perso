@@ -46,7 +46,7 @@ export default function CreateEstablishment() {
     try {
       coords = await getGeoPosWithAdresse(address);
     } catch (error) {
-      console.log('Error Get geo-position with adresse: ', err)
+      console.log('Error Get geo-position with adresse: ', error)
       return ;
     }
 
@@ -84,7 +84,19 @@ export default function CreateEstablishment() {
     } catch (error) {
       console.error("Erreur création établissement :", error);
       setError("Erreur lors de la recherche de l'adresse");
+      return ;
     }
+
+    const data2 = {
+      address: address.trim(),
+      //type: type,
+      category: category,
+
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+
+      
+    };
   };
 
   return (

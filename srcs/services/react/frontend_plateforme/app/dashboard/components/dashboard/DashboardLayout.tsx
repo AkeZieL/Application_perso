@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-import AddEtablishmentCard from "../AddEtablishmentCard"
+import AddEtablishmentCard from "../card/AddEtablishmentCard";
+import AddEventCard from "../card/AddEventCard";
 
 import api from "@/app/lib/api/axios";
 
@@ -18,22 +19,35 @@ export default function DashboardLayout() {
     const router = useRouter();
     const tab = searchParams.get("tab") || "overview";
     const [establishments, setEstablishments] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const handleTabChange = (value: string) => {
         router.push(`/dashboard?tab=${value}`);
     };
 
     useEffect(() => {
-         const fetchData = async () => {
+         const fetchEstablishmentData = async () => {
             try {
+                console.log("GET etablissement");
                 const res = await api.get("etablissement/");
                 setEstablishments(res.data);
-                console.log("RES = ", res);
+                console.log("Etablissement = ", res.data);
             }   catch (error) {
                 console.error(error);
             }
          };
-         fetchData();
+        const fetchEventsData = async () => {
+            try {
+                console.log("GET events");
+                const res = await api.get("event/");
+                setEvents(res.data);
+                console.log("Events = ", res.data);
+            }   catch (error) {
+                console.error(error);
+            }
+        };
+         fetchEstablishmentData();
+         fetchEventsData();
     }, []);
 
     return (
@@ -42,6 +56,7 @@ export default function DashboardLayout() {
                 <TabsList>
                     <TabsTrigger value="overview">Vue d'ensemble</TabsTrigger>
                     <TabsTrigger value="establishment">Gestion établissement</TabsTrigger>
+                    <TabsTrigger value="event">Gestion d'évenement</TabsTrigger>
                 </TabsList>
 
                 {/* OVERVIEW */}
@@ -138,6 +153,56 @@ export default function DashboardLayout() {
                         </Card>
                     )}
                     <AddEtablishmentCard />
+                </TabsContent>
+
+
+                <TabsContent value="event">
+                    {events.length > 0 ? (
+                        <>
+                            {events.map((even) => (
+                                <Card key={even.id} className="mb-4">
+                                    <CardHeader>
+                                        <CardTitle>{even.title}</CardTitle>
+                                    </CardHeader>
+
+                                    <CardContent className="space-y-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label>Nom de l'évènement</Label>
+                                                <Input placeholder={even.title}/>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label>Localisation</Label>
+                                                <Input placeholder={even.location} />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label>Etablissement</Label>
+                                                <Input placeholder={even.establishment} />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label>En cours</Label>
+                                                <Input placeholder={even.is_active} />
+                                            </div>
+                                            <div className="space-y-2 col-span-1 md:col-span-2">
+                                                <Label>Description</Label>
+                                                <Input placeholder={even.description} />
+                                            </div>
+                                        </div>
+                                        <Button className="mt-4">Enregistrer les modifications</Button>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </>
+                    ) : (
+                        <Card>
+                            <CardContent className="py-10 text-center">
+                                <p className="text-muted-foreground">
+                                    Aucun évenement enregistré
+                                </p>
+                            </CardContent>
+                        </Card>
+                    )}
+                    <AddEventCard />
                 </TabsContent>
             </Tabs>
         </div>

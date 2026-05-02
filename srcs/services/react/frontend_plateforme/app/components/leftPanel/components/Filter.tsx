@@ -29,14 +29,16 @@ export default function Filter({ filters, setFilters }) {
                 <AccordionItem value="lieu">
                     <AccordionTrigger onClick={() => toggleType("place")}>Lieu</AccordionTrigger>
                     <AccordionContent>
-                        <button onClick={() => updateFilter("category", "restaurant")}
-                            className={filters.category === "restaurant" ? "font-bold text-blue-600" : ""}
+                        <button onClick={() => updateFilter("category", "Restaurant")}
+                            className={filters.category === "Restaurant" ? "font-bold text-blue-600" : ""}
                         >
                             Restaurant
                         </button>
                     </AccordionContent>
                     <AccordionContent>
-                        <button onClick={() => updateFilter("category", "hotel")}>
+                        <button onClick={() => updateFilter("category", "Hotel")}
+                            className={filters.category === "Hotel" ? "font-bold text-blue-600" : ""}
+                        >
                             Hôtel
                         </button>
                     </AccordionContent>

@@ -8,13 +8,14 @@ from rest_framework_simplejwt.views import (
 )
 
 from .Auth.AuthViews import CustomUserViewSet, RegisterView, LoginView, LogoutView, RefreshTokenView
-from .Point.PointsView import PointViewSet
+from .Event.EventView import EventViewSet
 from .Etablissement.EtablissementViews import EstablishmentViewSet
 
 router = DefaultRouter()
 router.register(r'users', CustomUserViewSet, basename='user')
-router.register(r'point', PointViewSet, basename='point')
+router.register(r'event', EventViewSet, basename='event')
 router.register(r'etablissement', EstablishmentViewSet, basename='etablissement')
+
 
 urlpatterns = [
     path('', include(router.urls)),

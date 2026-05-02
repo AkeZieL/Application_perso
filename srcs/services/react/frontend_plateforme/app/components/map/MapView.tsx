@@ -8,5 +8,5 @@ const LeafletMap = dynamic(() => import("./LeafletMap"), {
 
 export default function MapView({ filters }) {
   
-  return <LeafletMap filterType={filters.type} filterCategory={filters.categories}/>;
+  return <LeafletMap filterType={filters.type} filterCategory={filters.category}/>;
 }

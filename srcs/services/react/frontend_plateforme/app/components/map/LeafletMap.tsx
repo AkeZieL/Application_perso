@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import getNearbyPoint from "@/app/lib/http/point/nearbyPoint"
 import parsePoint from "@/app/lib/utils/parsePoint"
 import getIcon from "@/app/lib/utils/getIcon"
 import { useGeolocation } from "@/app/hooks/useGeolocation";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import RecenterMap  from "./RecenterMap"
+import getNearbySelected from "@/app/lib/utils/getNearbySelected";
 
 
 export default function LeafletMap({ filterType, filterCategory }) {
@@ -15,7 +15,7 @@ export default function LeafletMap({ filterType, filterCategory }) {
   const { position, loading, error } = useGeolocation();
   const [center, setCenter] = useState<[number, number]>([42.8, 2.5]);
 
-useEffect(() => {
+  useEffect(() => {
     if (loading || error || !position) return;
 
     setCenter([position.latitude, position.longitude]);
@@ -31,11 +31,12 @@ useEffect(() => {
           params.type = filterType;
         }
         if (filterCategory !== "") {
-          params.categories = filterCategory;
+          params.category = filterCategory;
         }
 
-        console.log('GET NEARBY POINT WITH PARAM: ', params);
-        const data = await getNearbyPoint(params);
+        console.log('GET NEARBY SELECTED WITH PARAM: ', params);
+        const data = await getNearbySelected(params);
+        console.log('DATA NERBY SELECTED: ', data);
         setPoints(data || []);
       } catch (err) {
         console.error("nearby point error:", err);
@@ -56,12 +57,9 @@ useEffect(() => {
 
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {points.map((p) => {
-        const position = parsePoint(p.location);
-        if (!center) {
-          return <div>Loading map...</div>;
-        }
+        const pos = parsePoint(p.location);
         return (
-          <Marker key={p.id} position={position} icon={getIcon(p.type)}>
+          <Marker key={p.id} position={pos} icon={getIcon(p.type)}>
             <Popup>
               <div>
                 <strong>{p.address}</strong>

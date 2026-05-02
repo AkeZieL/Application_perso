@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import subscription from "@/app/lib/api/subscription"
+import { Button } from "@/components/ui/button";
 
-import AddEtablishmentCard from "@/app/dashboard/components/AddEtablishmentCard"
+import subscription from "@/app/lib/api/subscription"
 
 export default function CreatePointButton() {
   const [showCreate, setShowCreate] = useState(false);
@@ -46,18 +46,18 @@ export default function CreatePointButton() {
   }, [showCreate, router]);
 
   return (
-    <>
-      <button onClick={() => checkSubscription()}>
+    <div>
+      <Button onClick={() => checkSubscription()}>
         Créer un lieu
-      </button>
+      </Button>
 
       {showSubscribe && (
-        <div className="modal">
-          <button onClick={() => upgradeSubscriptionPlan()}>
-            Souscrire à l'abonnement Pro (c'est gratuit pour vous)
-          </button>
+        <div>
+          <Button onClick={() => upgradeSubscriptionPlan()}>
+            Souscrire à l'abonnement Pro
+          </Button>
         </div>
       )}
-    </>
+    </div>
   );
 }

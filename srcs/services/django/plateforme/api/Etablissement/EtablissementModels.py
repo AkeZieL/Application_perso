@@ -21,6 +21,7 @@ class Establishment(models.Model):
     name = models.CharField(max_length=255, null=False)
     address = models.CharField(max_length=255, null=False)
 
+    type = models.CharField(max_length=20, default="place")
     category = models.CharField(
         max_length=50,
         choices=CATEGORY_CHOICES,

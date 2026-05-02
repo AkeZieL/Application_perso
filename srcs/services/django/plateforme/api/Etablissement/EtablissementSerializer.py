@@ -25,7 +25,9 @@ class EstablishmentSerializer(serializers.ModelSerializer):
             "website",
             "created_at",
             "updated_at",
-            
+            "location",
+            "type",
+
             "latitude",
             "longitude",
         ]
