@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dialog";
 
 
-export default function CreateEstablishment() {
+export default function CreateEstablishment({ setEstablishments }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -51,6 +51,7 @@ export default function CreateEstablishment() {
     }
 
     if (!coords) {
+      console.log("Adresse non trouvé");
       setError("Adresse introuvable, essayez une autre adresse");
       return;
     }
@@ -69,7 +70,8 @@ export default function CreateEstablishment() {
     console.log("data établissement :", data);
 
     try {
-      await createEtablishment(data);
+      const res = await createEtablishment(data);
+      console.log("RES = ", res);
 
       // 3. reset UI après succès
       setName("");
@@ -81,6 +83,7 @@ export default function CreateEstablishment() {
 
       setOpen(false);
       setError("");
+      setEstablishments((prev) => [...prev, res]);
     } catch (error) {
       console.error("Erreur création établissement :", error);
       setError("Erreur lors de la recherche de l'adresse");

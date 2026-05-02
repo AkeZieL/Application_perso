@@ -28,15 +28,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import api from "@/app/lib/api/axios"
 import parsePoint from "@/app/lib/utils/parsePoint"
 import getGeoPosWithAdresse from "@/app/lib/http/getGeoPosWithAdresse"
+import createEvent from "@/app/lib/http/event/createEvent"
 
-export default function AddEventCard() {
-  const [establishments, setEstablishments] = useState<any[]>([]);
-  const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState("");
-  const [data, setData] = useState({
+export default function AddEventCard( {establishments, events, setEvents} ) {
+    const [open, setOpen] = useState(false);
+    const [mode, setMode] = useState("");
+    const [data, setData] = useState({
     title: "",
     etablissement: "",
     adresse: "",
@@ -45,16 +44,7 @@ export default function AddEventCard() {
     start_time: "",
     end_time: "",
     description: "",
-  });
-
-  // 🔹 Fetch établissements (ta requête GET ici)
-  useEffect(() => {
-    const fetchEstablishments = async () => {
-        const res = await api.get("etablissement/");
-        setEstablishments(res.data);
-    }
-        fetchEstablishments();
-    }, [])
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -93,8 +83,8 @@ export default function AddEventCard() {
                 latitude,
                 longitude,
             }
-            const res = await api.post("event/", data_to_send);
-            console.log("évènement créé :", res.data);
+            const res = await createEvent(data_to_send);
+            console.log("évènement créé :", res);
             // reset form
             setData({
                 title: "",
@@ -107,7 +97,7 @@ export default function AddEventCard() {
                 description: "",
             });
             setOpen(false);
-
+            setEvents((prev) => [...prev, res])
         } catch (error) {
             console.error("Erreur création établissement :", error);
         }
@@ -117,7 +107,7 @@ export default function AddEventCard() {
   return (
     <div className="flex justify-end">
         <Button onClick={() => setOpen(true)}>
-            Créer un établissement
+            Créer un évènement
         </Button>
 
         <Dialog open={open} onOpenChange={setOpen}>

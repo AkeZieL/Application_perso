@@ -152,7 +152,7 @@ export default function DashboardLayout() {
                             </CardContent>
                         </Card>
                     )}
-                    <AddEtablishmentCard />
+                    <AddEtablishmentCard setEstablishments={setEstablishments}/>
                 </TabsContent>
 
 
@@ -202,7 +202,7 @@ export default function DashboardLayout() {
                             </CardContent>
                         </Card>
                     )}
-                    <AddEventCard />
+                    <AddEventCard establishments={establishments} setEvents={setEvents}/>
                 </TabsContent>
             </Tabs>
         </div>

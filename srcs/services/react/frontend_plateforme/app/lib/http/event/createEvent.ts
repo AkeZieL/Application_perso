@@ -1,7 +1,7 @@
 import api from "@/app/lib/api/axios";
 
 
-const createPoint = async (coords) => {
+const createEvent = async (coords) => {
   try {
     //console.log({coords});
     const res = await api.post("event/", coords);
@@ -13,4 +13,4 @@ const createPoint = async (coords) => {
   }
 }
 
-export default createPoint
+export default createEvent

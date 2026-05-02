@@ -59,7 +59,7 @@ export default function LeafletMap({ filterType, filterCategory }) {
       {points.map((p) => {
         const pos = parsePoint(p.location);
         return (
-          <Marker key={p.id} position={pos} icon={getIcon(p.type)}>
+          <Marker key={`${p.type}-${p.id}`} position={pos} icon={getIcon(p.type)}>
             <Popup>
               <div>
                 <strong>{p.address}</strong>

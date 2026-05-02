@@ -19,7 +19,7 @@ export default function Filter({ filters, setFilters }) {
         ...prev,
         type: prev.type === newType ? null : newType,
         // On réinitialise la catégorie quand on change de type (recommandé)
-        category: prev.type === newType ? prev.category : null,
+        category: null,
         }));
     };
 

@@ -45,7 +45,7 @@ class EstablishmentViewSet(viewsets.ModelViewSet):
         user_location = GeoPoint(lng, lat, srid=4326)
 
         types = request.query_params.getlist("type")
-        categories = request.query_params.getlist("categories")
+        categories = request.query_params.getlist("category")
 
         queryset = (
             Establishment.objects
